@@ -1,2 +1,2 @@
 # PublishersData
-https://github.com/savaxxahx/PublishersData
+https://savaxxahx.github.io/PublishersData
