@@ -1,8 +1,7 @@
-<!DOCTYPE html>
-<html>
- <head>
-	<title> About The Publishers Data Set</title>
-	 <link rel="stylesheet" type="text/css" href="style.css">
+{% extends "layout.html" %}
+{% set active_page ="home" %}
+{% block title %}Home{% endblock %}
+ {% block content %}
  </head> 
 	<h2> About the Publishers Data</h2>
  <p> The data used for this page was taken from the CORGIS Data Sets. The Publishers Data set is a collection that anaylzes e-books sales of 
@@ -23,8 +22,6 @@
        <br>
 <a href="http://authorearnings.com/report/september-2015-author-earnings-report/">
 		http://authorearnings.com/report/september-2015-author-earnings-report/ </a>
-	
+	{% endblock %}
  
  
-   </body>
-</html>
