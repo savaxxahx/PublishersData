@@ -10,6 +10,8 @@ app = Flask(__name__) #__name__ = "__main__" if this is the file that was run.  
 def render_main():
     return render_template('home.html')
 
+
+@app.route("/comparison")
 def compare_data():
       with open('publishers.json') as publishers_data:
         books = json.load(publishers_data)
