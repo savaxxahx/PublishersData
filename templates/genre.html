@@ -1,1 +1,17 @@
-make a graph comparing how many books there are of each genre listed
+"""make a graph comparing how many books there are of each genre listed"""
+
+{% extends "layout.html" %}
+{% set active_page = "Gen" %}
+
+{% block content %}
+<form action="/answer">
+  <select name="genre">
+  {{type}}
+   </select>
+  <br><br>
+  <input type="submit">
+  </form>
+  <p> {{howmuch}} </p>
+
+{% endblock %}
+
