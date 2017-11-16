@@ -1,1 +1,17 @@
-list the different publishers under each publisher type, take list from comparison. html
+"""list the different publishers under each publisher type, take list from comparison. html"""
+
+{% extends "layout.html" %}
+{% set active_page = "Comp" %}
+
+{% block content %}
+<form action="/answer">
+  <select name="publisher type">
+  {{type}}
+   </select>
+  <br><br>
+  <input type="submit">
+  </form>
+  <p> {{publishers}} </p>
+
+{% endblock %}
+
