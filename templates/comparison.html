@@ -10,4 +10,14 @@ higest average rating, units sold and gross sales for each publishing  type """
 {% extends "layout.html" %}
 {% set active_page = "Comp" %}
 
+{% block content %}
+<form action="/answer">
+  <select name="publisher type">
+  {{type}}
+   </select>
+  <br><br>
+  <input type="submit">
+  </form>
+  <p> {{info}} </p>
 
+{% endblock %}
