@@ -12,12 +12,25 @@ def render_main():
 
 
 @app.route("/comparison")
+def render_compare():
+    return render_template('comparison.html', type= compare_data())
+    
+    
 def compare_data():
-      with open('publishers.json') as publishers_data:
+    with open('publishers.json') as publishers_data:
         books = json.load(publishers_data)
+    types = []
+    for b in books:
+        if b["publisher"]["type"] not in types:
+            types.append(b["publisher"]["type"])
+         
+    options = ""
+    for s in types:
+        options+=Markup("<option value=\"" + s + "\">" + s + "</option>")
+    return options
 
 
 
 
 if __name__=="__main__":
-    app.run(debug=False, port=54321)
+    app.run(debug=True, port=54321)
