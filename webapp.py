@@ -13,9 +13,12 @@ def render_main():
 
 @app.route("/comparison")
 def render_compare():
-    return render_template('comparison.html', type= compare_data())
+    return render_template('comparison.html', type= compare_data(), info = get_info(request.args["publishertype"]))
     
-    
+
+	
+	
+	
 def compare_data():
     with open('publishers.json') as publishers_data:
         books = json.load(publishers_data)
@@ -29,7 +32,22 @@ def compare_data():
         options+=Markup("<option value=\"" + s + "\">" + s + "</option>")
     return options
 
-
+def get_info(publishertype):
+    with open('publishers.json') as publishers_data:
+        books = json.load(publishers_data)
+    first = books[0]["statistics"]["average rating"]
+    x = books[0]["daily"]["units sold"]
+    y = books[0]["daily"]["gross sales"]
+    for b in books:
+        if b["publisher"]["type"] == publishertype:
+            if b["statistics"]["average rating"]> first:
+                first = b["statistics"]["average rating"]
+            if b["daily"]["units sold"]> x:
+                x = b["daily"]["units sold"]
+            if b["daily"]["gross sales"] > y:
+                y = b["daily"]["gross sales"]
+    return str(" For") + " " + publishertype + str(" the highest units sold is") + x + str(",") + str(" the higest average rating is") + first
+    + str(",") + str("and the highest gross sales is") + y + str(".")
 
 
 if __name__=="__main__":
