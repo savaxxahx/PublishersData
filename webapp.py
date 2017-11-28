@@ -13,12 +13,10 @@ def render_main():
 
 @app.route("/comparison")
 def render_compare():
-    return render_template('comparison.html', type= compare_data(), info = get_info(request.args["publishertype"]))
-    
-
-	
-	
-	
+    if "publishertype" in request.args:
+       return render_template('comparison.html', type1= compare_data(), info = get_info(request.args["publishertype"]))
+    else:
+       return render_template('comparison.html', type1 = compare_data())
 def compare_data():
     with open('publishers.json') as publishers_data:
         books = json.load(publishers_data)
@@ -46,8 +44,12 @@ def get_info(publishertype):
                 x = b["daily"]["units sold"]
             if b["daily"]["gross sales"] > y:
                 y = b["daily"]["gross sales"]
-    return str(" For") + " " + publishertype + str(" the highest units sold is") + x + str(",") + str(" the higest average rating is") + first
-    + str(",") + str("and the highest gross sales is") + y + str(".")
+    return str(" For") + " " + publishertype + str(" the highest units sold is") + " " + str(x) + str(",") + str(" the higest average rating is") +" " +  str(first)+ str(",") +" " + str("and the highest gross sales is") + " " + str(y) + str(".")
+	
+def publisher_list(publishertype):
+    with open('publsihers.json') as publsihers_data:
+        books = json.load(publishers_data)
+
 
 
 if __name__=="__main__":

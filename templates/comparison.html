@@ -1,19 +1,13 @@
-"""single author 
-small 
-indie 
-big five 
-small/medium 
-amazon
-
-higest average rating, units sold and gross sales for each publishing  type """
 
 {% extends "layout.html" %}
 {% set active_page = "Comp" %}
 
+<title> Find The Highest Units Sold, The Highest Average Rating, and The Highest Gross Sales For Each Publisher Type</title>
+
 {% block content %}
 <form action="/comparison">
-  <select name="publisher type">
-  {{type}}
+  <select name="publishertype">
+  {{type1}}
    </select>
   <br><br>
   <input type="submit">
