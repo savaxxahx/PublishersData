@@ -9,7 +9,13 @@ app = Flask(__name__) #__name__ = "__main__" if this is the file that was run.  
 @app.route("/")
 def render_main():
     return render_template('home.html')
-
+	
+@app.route("/publishers")
+def render_publishers():
+    if "publishertype" in request.args:
+        return render_template('publishers.html', type2 = compare_data(), publishers = publisher_list(request.args["publishertype"]))
+    else:
+	    return render_template('publishers.html', type2 = compare_data())
 
 @app.route("/comparison")
 def render_compare():
@@ -47,8 +53,16 @@ def get_info(publishertype):
     return str(" For") + " " + publishertype + str(" the highest units sold is") + " " + str(x) + str(",") + str(" the higest average rating is") +" " +  str(first)+ str(",") +" " + str("and the highest gross sales is") + " " + str(y) + str(".")
 	
 def publisher_list(publishertype):
-    with open('publsihers.json') as publsihers_data:
+    with open('publishers.json') as publishers_data:
         books = json.load(publishers_data)
+    names = []
+    for b in books:
+        if b["publisher"]["type"] == publishertype:
+            if b["publisher"]["name"] not in names:
+                names.append(b["publisher"]["name"])
+				
+    return names
+            
 
 
 

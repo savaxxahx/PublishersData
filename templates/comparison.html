@@ -2,9 +2,12 @@
 {% extends "layout.html" %}
 {% set active_page = "Comp" %}
 
-<title> Find The Highest Units Sold, The Highest Average Rating, and The Highest Gross Sales For Each Publisher Type</title>
+
 
 {% block content %}
+
+<h1> Find The Highest Units Sold, The Highest Average Rating, and The Highest Gross Sales For Each Publisher Type</h1>
+<h2> Select A Publisher Type </h2>
 <form action="/comparison">
   <select name="publishertype">
   {{type1}}
