@@ -72,5 +72,63 @@ function BarGraph(ctx) {
 		
 		barHeight = ratio * maxBarHeight;
   
-  
+  // Draw bar background
+		ctx.fillStyle = "#333";			
+		ctx.fillRect(that.margin + i * that.width / numOfBars,
+		  graphAreaHeight - barHeight,
+		  barWidth,
+		  barHeight);
+		  
+		  
+		  // Draw bar color if it is large enough to be visible
+		if (barHeight > border * 2) {
+			// Create gradient
+			gradient = ctx.createLinearGradient(0, 0, 0, graphAreaHeight);
+			gradient.addColorStop(1-ratio, that.colors[i % that.colors.length]);
+			gradient.addColorStop(1, "#ffffff");
+
+			ctx.fillStyle = gradient;
+			// Fill rectangle with gradient
+			ctx.fillRect(that.margin + i * that.width / numOfBars + border,
+			  graphAreaHeight - barHeight + border,
+			  barWidth - border * 2,
+			  barHeight - border * 2);
+		}
+
+		// Write bar value
+		ctx.fillStyle = "#333";
+		ctx.font = "bold 12px sans-serif";
+		ctx.textAlign = "center";
+		// Use try / catch to stop IE 8 from going to error town
+		try {
+		  ctx.fillText(parseInt(arr[i],10),
+			i * that.width / numOfBars + (that.width / numOfBars) / 2,
+			graphAreaHeight - barHeight - 10);
+		} catch (ex) {}
+		// Draw bar label if it exists
+		if (that.xAxisLabelArr[i]) {					
+		  // Use try / catch to stop IE 8 from going to error town				
+		  ctx.fillStyle = "#333";
+		  ctx.font = "bold 12px sans-serif";
+		  ctx.textAlign = "center";
+		  try{
+			ctx.fillText(that.xAxisLabelArr[i],
+			  i * that.width / numOfBars + (that.width / numOfBars) / 2,
+			  that.height - 10);
+			} catch (ex) {}
+		  }
+		}
+	  };
+	  
+this.width = 300;
+  this.height = 150;	
+  this.maxValue;
+  this.margin = 5;
+  this.colors = ["purple", "red", "green", "yellow"];
+  this.curArr = [];
+  this.backgroundColor = "#fff";
+  this.xAxisLabelArr = [];
+  this.yAxisLabelArr = [];
+  this.animationInterval = 100;
+  this.animationSteps = 10;
   
