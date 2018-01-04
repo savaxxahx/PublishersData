@@ -1,0 +1,23 @@
+body{
+	font-family: "Verdana", Sans-Serif;
+}
+
+p{
+	font-size: 130%;
+	color:rgb(146,31,90);
+	text-align: left;
+}
+
+h1{
+	text-align: left;
+	font-size: 120%
+}
+
+h2{
+	text-align: left;
+	font-size:120%
+}
+
+a{
+	text-align:center;
+}

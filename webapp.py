@@ -23,6 +23,10 @@ def render_compare():
        return render_template('comparison.html', type1= compare_data(), info = get_info(request.args["publishertype"]))
     else:
        return render_template('comparison.html', type1 = compare_data())
+	   
+@app.route("/genre")
+def render_genre():
+    return render_template('genre.html', genredata = genre_list())
 def compare_data():
     with open('publishers.json') as publishers_data:
         books = json.load(publishers_data)
@@ -60,11 +64,24 @@ def publisher_list(publishertype):
         if b["publisher"]["type"] == publishertype:
             if b["publisher"]["name"] not in names:
                 names.append(b["publisher"]["name"])
+
 				
     return names
             
+def genre_list():
+    with open('publishers.json') as publishers_data:
+        books = json.load(publishers_data)
+    genre ={}
+    for b in books:
+        if b["genre"] not in genre:
+            genre[b["genre"]] = 1
+        if b["genre"] in genre:
+            genre[b["genre"]] = genre[b["genre"]] +1
+    g = "{"
+    for s in genre:
+	    g += Markup("x:" + "'" + s + "'"+ ", y:"+ str(genre[s]) + "},{")
 
-
+    return g[0:-2]
 
 if __name__=="__main__":
     app.run(debug=True, port=54321)
