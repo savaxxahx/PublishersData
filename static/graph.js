@@ -106,24 +106,7 @@ var CanvasChart = function () {
             if (ptY < margin.top) ptY = margin.top;
             var ptX = (i * xInc) + margin.left;
 
-            if (i > 0 && type == renderType.lines) {
-                //Draw connecting lines
-                drawLine(ptX, ptY, prevX, prevY, 'black', 2);
-            }
-
-            if (type == renderType.points) {
-                ctx.beginPath();
-                //Render circle
-                ctx.arc(ptX, ptY, 8, 0, 2 * Math.PI, false)
-                ctx.fill();
-                ctx.lineWidth = 1;
-                ctx.strokeStyle = '#000';
-                ctx.stroke();
-                ctx.closePath();
-            }
-
-            prevX = ptX;
-            prevY = ptY;
+           
         }
     };
 
@@ -131,14 +114,21 @@ var CanvasChart = function () {
         return Math.round(xMax / data.dataPoints.length) - 1;
     };
 
-    var drawLine = function(startX, startY, endX, endY, strokeStyle, lineWidth) {
+    var drawRect = function(strokeStyle, lineWidth) {
         if (strokeStyle != null) ctx.strokeStyle = strokeStyle;
         if (lineWidth != null) ctx.lineWidth = lineWidth;
         ctx.beginPath();
-        ctx.moveTo(startX, startY);
-        ctx.lineTo(endX, endY);
+        ctx.lineWidth = "4";
+		ctx.strokeStyle  = "blue";
+		 var x = 0;
+		for( i = 0 ; i< dataDef.dataPoints.length ;  i++)
+		{
+			ctx.rect(x,dataDef.dataPoints, 40 , (dataDef.dataPoints/100));
+			x+=50;
+			
+		}
         ctx.stroke();
-        ctx.closePath();
+        
     };
 
     return {
