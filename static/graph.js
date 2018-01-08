@@ -86,6 +86,17 @@ var CanvasChart = function () {
             txtSize = ctx.measureText(txt);
             ctx.fillText(txt, xPos, yMax + (margin.bottom / 3));
             xPos += xInc*2;
+			
+	
+            if (strokeStyle != null) ctx.strokeStyle = strokeStyle;
+            if (lineWidth != null) ctx.lineWidth = lineWidth;
+            ctx.lineWidth = "4";
+		    ctx.strokeStyle  = "blue";
+		    var x = 0;
+		
+		    ctx.rect(x,dataDef.dataPoints/100 , 40 , (dataDef.dataPoints/100));
+			x+=50;
+		
         }
 
         //Vertical line
@@ -109,27 +120,10 @@ var CanvasChart = function () {
            
         }
     };
-
-    var getXInc = function() {
+ var getXInc = function() {
         return Math.round(xMax / data.dataPoints.length) - 1;
     };
 
-    var drawRect = function(strokeStyle, lineWidth) {
-        if (strokeStyle != null) ctx.strokeStyle = strokeStyle;
-        if (lineWidth != null) ctx.lineWidth = lineWidth;
-        ctx.beginPath();
-        ctx.lineWidth = "4";
-		ctx.strokeStyle  = "blue";
-		 var x = 0;
-		for( i = 0 ; i< dataDef.dataPoints.length ;  i++)
-		{
-			ctx.rect(x,dataDef.dataPoints, 40 , (dataDef.dataPoints/100));
-			x+=50;
-			
-		}
-        ctx.stroke();
-        
-    };
 
     return {
         renderType: renderType,
